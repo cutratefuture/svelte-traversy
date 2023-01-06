@@ -1,5 +1,5 @@
 <script>
-  import FeedBackList from "./components/FeedBackList.svelte";
+  import FeedbackList from "./components/FeedbackList.svelte";
 
   let feedback = [
     {
@@ -18,8 +18,16 @@
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.",
     },
   ];
+
+  $: count = feedback.length;
+
+  const deleteFeedback = (e) => {
+    const itemId = e.detail;
+    feedback = feedback.filter((item) => item.id != itemId);
+  };
 </script>
 
 <main class="container">
-  <FeedBackList {feedback}/>
+  <h1>{count}</h1>
+  <FeedbackList {feedback} on:delete-feedback={deleteFeedback} />
 </main>
